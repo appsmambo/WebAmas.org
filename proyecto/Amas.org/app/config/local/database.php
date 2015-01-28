@@ -23,7 +23,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'amas.org',
+			'database'  => 'amas_org',
 			'username'  => 'root',
 			'password'  => '',
 			'charset'   => 'utf8',
