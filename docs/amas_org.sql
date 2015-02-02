@@ -69,8 +69,8 @@ CREATE TABLE IF NOT EXISTS `pages` (
   `fecha_publicacion` date NOT NULL,
   `url` varchar(200) COLLATE utf8_spanish2_ci NOT NULL,
   `estado` char(1) COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'P' COMMENT '[P]ublicado [O]culto',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL,
   `titulo_eng` varchar(200) COLLATE utf8_spanish2_ci NOT NULL,
   `contenido_eng` text COLLATE utf8_spanish2_ci NOT NULL,
   `url_eng` varchar(200) COLLATE utf8_spanish2_ci NOT NULL

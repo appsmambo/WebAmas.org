@@ -15,9 +15,19 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	public function showWelcome()
+	public function inicio()
 	{
+		
 		return View::make('hello');
 	}
 
+	public function creaUsuario()
+	{
+		$user = Sentry::createUser(array(
+					'email' => 'administrador@amas.org',
+					'first_name' => 'Administrador',
+					'password' => 'admin',
+					'activated' => true,
+		));
+	}
 }
