@@ -1,40 +1,42 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
-*/
+Route::get('/admin/login', function()
+{
+	return View::make('admin/login');
+});
 
-Route::get('/', 'HomeController@creaUsuario');
+Route::get('/login', function()
+{
+	return View::make('admin/login');
+});
 
+Route::filter('auth', function()
+{
+	if (!Sentry::check()) {
+		return Redirect::to('/admin/login');
+	} else {
+		return Redirect::to('/admin/inicio');
+	}
+});
 
-
-Route::group(array('prefix' => 'admin'), function()
+Route::group(array('before' => 'auth', 'prefix' => 'admin'), function()
 {
 
-	Route::get('/login', function()
-	{
-		return View::make('admin/login');
-	});
-
-	Route::get('/asd', function()
+	Route::get('/inicio', function()
 	{
 		echo 'noreturn';
 	});
-
-	Route::get('user', function()
+	
+	Route::get('/user', function()
 	{
 		//
 	});
 
 });
 
+// AGREGAR 404 DE INDEX
+
+Route::get('/', 'HomeController@inicio');
 
 /*Route::filter('Sentry', function()
 {
