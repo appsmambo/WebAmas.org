@@ -25,9 +25,10 @@ class HomeController extends BaseController {
 	{
 		$user = Sentry::createUser(array(
 					'email' => 'administrador@amas.org',
-					'first_name' => 'Administrador',
+					'name' => 'Administrador',
 					'password' => 'admin',
 					'activated' => true,
 		));
+
 	}
 }
