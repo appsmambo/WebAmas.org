@@ -1,26 +1,22 @@
 <?php
 
-Route::get('admin/login', array('as' => 'login', 'uses' => 'AdminController@getLogin'));
+Route::get('/admin/login', array('as' => 'login', 'uses' => 'AdminController@getLogin'));
+Route::post('/admin/login', array('uses' => 'AdminController@postLogin'));
 
 Route::group(array('before' => 'auth.admin'), function()
 {
-	Route::get('admin', array('as' => 'admin.index', 'uses' => 'AdminController@getIndex'));
+	Route::get('/admin', array('as' => 'admin.index', 'uses' => 'AdminController@getIndex'));
 	
 });
 
 Route::filter('auth.admin', function()
 {
-		if (!Sentry::check()) {
-			echo '1no puede acceder a admin';exit;
-		} else {
-			echo '2puede acceder a admin';exit;
-		}
-/*	$user = Sentry::getUser();
-	if ( !$user->hasAccess('admin')) {
-		return Redirect::route('login');
-	}*/
+	if (!Sentry::check()) {
+		Redirect::route('login');
+	}
 });
 
+Route::get('/', array('as' => 'index', 'uses' => 'AdminController@index'));
 
 /*
 // rutas del admin
@@ -80,10 +76,6 @@ Route::group(array('prefix' => 'admin', 'before' => 'Sentry|inGroup:Admins'), fu
 });
 */
 
-/*Route::get('/', function()
-{
-	return View::make('hello');
-});*/
 /*
 Route::get('/admin', function()
 {
