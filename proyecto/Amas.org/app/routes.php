@@ -1,40 +1,65 @@
 <?php
 
-Route::get('/admin/login', function()
+Route::get('admin/login', array('as' => 'login', 'uses' => 'AdminController@getLogin'));
+
+Route::group(array('before' => 'auth.admin'), function()
 {
-	return View::make('admin/login');
+	Route::get('admin', array('as' => 'admin.index', 'uses' => 'AdminController@getIndex'));
+	
 });
 
-Route::get('/login', function()
+Route::filter('auth.admin', function()
 {
-	return View::make('admin/login');
+		if (!Sentry::check()) {
+			echo '1no puede acceder a admin';exit;
+		} else {
+			echo '2puede acceder a admin';exit;
+		}
+/*	$user = Sentry::getUser();
+	if ( !$user->hasAccess('admin')) {
+		return Redirect::route('login');
+	}*/
 });
 
-Route::filter('auth', function()
-{
-	if (!Sentry::check()) {
-		return Redirect::to('/admin/login');
-	} else {
-		return Redirect::to('/admin/inicio');
-	}
-});
 
-Route::group(array('before' => 'auth', 'prefix' => 'admin'), function()
+/*
+// rutas del admin
+Route::group(array('before' => 'auth'), function()
 {
 
-	Route::get('/inicio', function()
+	Route::get('/admin/inicio', function()
 	{
 		echo 'noreturn';
 	});
 	
-	Route::get('/user', function()
+	Route::get('/admin/user', function()
 	{
 		//
 	});
 
+	Route::get('/admin/login', function()
+	{
+		return View::make('admin/login');
+	});
+
 });
 
-// AGREGAR 404 DE INDEX
+
+
+// auth
+Route::filter('auth', function()
+{
+/*	$user = Sentry::getUser();
+	print_r($user);exit;
+	if ( !$user->hasAccess('admin')) {
+		return Redirect::route('index');
+	}*/
+/*	if (!Sentry::check()) {
+		//return Redirect::to('/admin/login');
+		//return View::make('admin/login');
+	}
+});
+*/
 
 Route::get('/', 'HomeController@inicio');
 

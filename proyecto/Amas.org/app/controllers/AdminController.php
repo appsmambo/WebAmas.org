@@ -2,18 +2,23 @@
 
 class AdminController extends BaseController {
 
-	/*
-	|--------------------------------------------------------------------------
-	| Default Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| You may wish to use controllers instead of, or in addition to, Closure
-	| based routes. That's great! Here is an example controller method to
-	| get you started. To route to this controller, just add the route:
-	|
-	|	Route::get('/', 'HomeController@showWelcome');
-	|
-	*/
+	private $_login = null;
+	private $_pagina = null;
+	
+	public function __construct()
+	{
+		$this->_login = false;
+		$this->_pagina = '';
+	}
+
+	public function getLogin()
+	{
+		$this->_login = true;
+		$this->_pagina = ' - Login';
+		// borrar session y demas datos bla bla bla
+		return View::make('admin/login')->with('pagina', $this->_pagina)
+										->with('login', $this->_login);
+	}
 
 	public function showWelcome()
 	{
