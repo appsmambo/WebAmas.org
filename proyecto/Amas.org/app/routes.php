@@ -1,5 +1,7 @@
 <?php
 
+Route::get('/crea-usuario', array('uses' => 'HomeController@creaUsuario'));
+
 Route::get('/admin/login', array('as' => 'login', 'uses' => 'AdminController@getLogin'));
 Route::post('/admin/login', array('uses' => 'AdminController@postLogin'));
 
@@ -12,7 +14,7 @@ Route::group(array('before' => 'auth.admin'), function()
 Route::filter('auth.admin', function()
 {
 	if (!Sentry::check()) {
-		Redirect::route('login');
+		return Redirect::route('login');
 	}
 });
 

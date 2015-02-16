@@ -27,7 +27,11 @@
 @endif
 	</head>
 	<body>
-@if (!isset($login))
+@if (isset($login) && $login === true)
+		<div class="container">
+			@yield('content')
+		</div>
+@else
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
 				<div class="navbar-header">
@@ -230,10 +234,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
-@else
-		<div class="container">
-			@yield('content')
 		</div>
 @endif
 	</body>

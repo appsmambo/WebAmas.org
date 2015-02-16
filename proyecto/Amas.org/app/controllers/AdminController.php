@@ -22,7 +22,7 @@ class AdminController extends BaseController {
 		$this->_login = true;
 		$this->_pagina = ' - Login';
 		// borrar session y demas datos bla bla bla
-		return View::make('admin/login')->with('pagina', $this->_pagina)
+		return View::make('admin.login')->with('pagina', $this->_pagina)
 										->with('login', $this->_login);
 	}
 	
