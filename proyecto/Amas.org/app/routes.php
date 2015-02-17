@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/crea-usuario', array('uses' => 'HomeController@creaUsuario'));
+//Route::get('/crea-usuario', array('uses' => 'HomeController@creaUsuario'));
 
 Route::get('/admin/login', array('as' => 'login', 'uses' => 'AdminController@getLogin'));
 Route::post('/admin/login', array('uses' => 'AdminController@postLogin'));
@@ -8,7 +8,9 @@ Route::post('/admin/login', array('uses' => 'AdminController@postLogin'));
 Route::group(array('before' => 'auth.admin'), function()
 {
 	Route::get('/admin', array('as' => 'admin.index', 'uses' => 'AdminController@getIndex'));
+	Route::get('/admin/logout', array('as' => 'logout', 'uses' => 'AdminController@getLogOut'));
 	
+	Route::get('/admin/paginas/inicio', array('uses' => 'AdminController@getPaginasInicio'));
 });
 
 Route::filter('auth.admin', function()
